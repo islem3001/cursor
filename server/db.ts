@@ -1,4 +1,5 @@
 import { Pool, PoolClient } from 'pg';
+import { drizzle } from 'drizzle-orm/node-postgres';
 import dotenv from 'dotenv';
 
 // Load environment variables
@@ -16,6 +17,9 @@ const pool = new Pool({
     rejectUnauthorized: false // Required for Neon.tech
   }
 });
+
+// Create drizzle instance
+export const db = drizzle(pool);
 
 // Handle pool errors
 pool.on('error', (err) => {
